@@ -1,4 +1,4 @@
-﻿# PlanCalculator
+﻿# PlanCalculator - .Net Core 2.2 Console application
 
 Customers can buy goods and pay the purchase price over time on a payment plan. 
 
@@ -94,5 +94,12 @@ The required deposit and instalment interval and period depend on the purchase p
         </table>
         
 The plan calculator will take the purchase price and purchase date as input and output the deposit, installments amounts and dates. 
+
+--------------------------------------------------------------------------------------------------------------------------------
+Tool used - Visual Studio 1019
+
+PlanCalculator solution contains 3 projects (Console, Core & Infrastructure)
+
+
 
 
