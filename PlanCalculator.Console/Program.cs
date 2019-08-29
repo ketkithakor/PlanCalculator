@@ -42,8 +42,8 @@ namespace PlanCalculator.Console
                     System.Console.WriteLine("--------------------");
                     System.Console.WriteLine("Deposit Amount:" + i.GetDepositAmount());
                     System.Console.WriteLine("Installment Amount:" + i.GetInstallmentAmount());
-                    var pdates = i.PlanmentDates();
-                    System.Console.WriteLine("Planment Dates:");
+                    var pdates = i.PaymentDates();
+                    System.Console.WriteLine("Payment Dates:");
                     foreach (DateTime d in pdates)
                     {
                         System.Console.WriteLine(d.ToString("dd/MM/yyyy"));

@@ -8,7 +8,7 @@ namespace PlanCalculator.Core.Services
 {
     public class InstallmentService : IInstallmentService
     {
-        private IPlanRepository _planRepository;
+        private readonly IPlanRepository _planRepository;
         public InstallmentService(IPlanRepository planRepository)
         {
             _planRepository = planRepository;

@@ -31,7 +31,7 @@ namespace PlanCalculator.Core.AggregatesModel.InstallmentAggregate
             return (_purchasePrice - GetDepositAmount()) / _installmentPeriod;
         }
 
-        public IEnumerable<DateTime> PlanmentDates()
+        public IEnumerable<DateTime> PaymentDates()
         {            
             DateTime purDate=_purchaseDate;
             for (int i = 0; i < _installmentPeriod; i++)
