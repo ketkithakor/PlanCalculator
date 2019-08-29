@@ -7,19 +7,50 @@ using PlanCalculator.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using Serilog;
 
 namespace PlanCalculator.Console
 {
     class Program
     {
         private static IServiceProvider _serviceProvider;
+        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .Build();
         static void Main(string[] args)
         {
-            PlanCalculatorMainApp().GetAwaiter();
+            try
+            {                
+                PlanCalculatorMainApp().GetAwaiter();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "ERROR: Terminated unexpectedly!");                
+                throw ex;
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+                DisposeServices();
+            }
+            
+        }
+        private static async Task ConfigureLogging()
+        {
+            //configure logging
+            await Task.FromResult(Log.Logger = new LoggerConfiguration()
+              .ReadFrom.Configuration(Configuration)
+              .CreateLogger());
         }
         private static async Task PlanCalculatorMainApp()
         {
             await RegisterServices();
+            await ConfigureLogging();
+
+            Log.Information("Start application");
 
             decimal pPrice = await IsValidPurchasePrice(await EnterPurchasePrice());
             if (pPrice == 0) { return; }
@@ -32,33 +63,42 @@ namespace PlanCalculator.Console
 
         private static async Task DisplayInstallments(decimal pPrice, DateTime pDate)
         {
-            var installmentService = _serviceProvider.GetService<IInstallmentService>();
-            var installments = await installmentService.GetInstallmentsAsync(pPrice, pDate);
+            try {
+                var installmentService = _serviceProvider.GetService<IInstallmentService>();
+                var installments = await installmentService.GetInstallmentsAsync(pPrice, pDate);
 
-            if (installments != null && installments.Count > 0)
-            {
-                foreach (Installment i in installments)
+                if (installments != null && installments.Count > 0)
                 {
-                    System.Console.WriteLine("--------------------");
-                    System.Console.WriteLine("Deposit Amount:" + i.GetDepositAmount());
-                    System.Console.WriteLine("Installment Amount:" + i.GetInstallmentAmount());
-                    var pdates = i.PaymentDates();
-                    System.Console.WriteLine("Payment Dates:");
-                    foreach (DateTime d in pdates)
+                    foreach (Installment i in installments)
                     {
-                        System.Console.WriteLine(d.ToString("dd/MM/yyyy"));
+                        System.Console.WriteLine("--------------------");
+                        System.Console.WriteLine("Deposit Amount:" + i.GetDepositAmount());
+                        System.Console.WriteLine("Installment Amount:" + i.GetInstallmentAmount());
+                        var pdates = i.PaymentDates();
+                        System.Console.WriteLine("Payment Dates:");
+                        foreach (DateTime d in pdates)
+                        {
+                            System.Console.WriteLine(d.ToString("dd/MM/yyyy"));
+                        }
+                        System.Console.WriteLine("--------------------");
                     }
-                    System.Console.WriteLine("--------------------");
+                }
+                else
+                {
+                    System.Console.WriteLine("Plans not offered for this price.");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                System.Console.WriteLine("Plans not offered for this price.");
+                Log.Error(ex, "ERROR in DisplayInstallments method");
+                throw ex;
             }
+            
         }
         private static async Task RegisterServices()
         {
             await Task.FromResult(_serviceProvider = new ServiceCollection()
+                .AddSingleton(Configuration)
                 .AddTransient<IPlanRepository, PlanRepository>()
                 .AddTransient<IInstallmentService, InstallmentService>()
                 .BuildServiceProvider());
@@ -94,6 +134,18 @@ namespace PlanCalculator.Console
         {
             System.Console.WriteLine("Enter purchase date:");
             return await Task.FromResult(System.Console.ReadLine());
+        }
+
+        private static void DisposeServices()
+        {
+            if (_serviceProvider == null)
+            {
+                return;
+            }
+            if (_serviceProvider is IDisposable)
+            {
+                ((IDisposable)_serviceProvider).Dispose();
+            }
         }
     }
 }

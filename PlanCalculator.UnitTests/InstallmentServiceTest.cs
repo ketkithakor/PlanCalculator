@@ -12,9 +12,11 @@ namespace PlanCalculator.UnitTests
     public class InstallmentServiceTest
     {
         private readonly Mock<IPlanRepository> _planRepositoryMock;
+
         public InstallmentServiceTest()
         {
             _planRepositoryMock = new Mock<IPlanRepository>();
+
         }
 
         [Fact]
