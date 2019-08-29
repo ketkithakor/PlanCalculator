@@ -98,6 +98,8 @@ The plan calculator will take the purchase price and purchase date as input and 
 --------------------------------------------------------------------------------------------------------------------------------
 Tool used - Visual Studio 1019
 
+Implemented : Clean Architecture, SOLID Principle, Dependency Injection, Repository Pattren.
+
 PlanCalculator solution contains 3 projects (Console, Core & Infrastructure)
 
 PlanCalculator.Core library project - No dependencies
