@@ -15,10 +15,10 @@ The required deposit and instalment interval and period depend on the purchase p
                  Deposit (% of Purchase)
                 </th>
                 <th>
-                Instalment interval
+                Installment interval
                 </th>
                 <th>
-                Instalment Period
+                Installment Period
                 </th>
                 </tr>
                  <tr>
