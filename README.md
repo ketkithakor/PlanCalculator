@@ -100,6 +100,9 @@ Tool used - Visual Studio 1019
 
 PlanCalculator solution contains 3 projects (Console, Core & Infrastructure)
 
+PlanCalculator.Core library project - No dependencies
+
+
 
 
 
