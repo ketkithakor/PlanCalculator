@@ -8,11 +8,93 @@ Customers pay a deposit at the time of purchase, take the goods home and pay the
 
 The required deposit and instalment interval and period depend on the purchase price, as shown below.
 
-Purchase Price($)	           Deposit (% of Purchase)	          Instalment interval	        Instalment Period
-Less than 1000	              Plans not offered	                  Plans not offered	        Plans not offered
-100 to 1000	                      20%	                                 15 days	                  5
-100 to 1000	                      30%	                                 15 days	                  4
-1000 to 10000	                    25%	                                 30 days                   	4
-More than 10000             	Plans not offered	                    Plans not offered	        Plans not offered
+<table>
+        <tr>
+                <th>
+                Purchase Price($)
+                </th>
+                <th>
+                 Deposit (% of Purchase)
+                </th>
+                <th>
+                Instalment interval
+                </th>
+                <th>
+                Instalment Period
+                </th>
+                </tr>
+                 <tr>
+                <td>
+                Less than 1000	 
+                </td>
+                <td>
+                Plans not offered	       
+                </td>
+                <td>
+                Plans not offered
+                </td>
+                <td>
+                Plans not offered
+                </td>
+                </tr>
+                 <tr>
+                <td>
+                100 to 1000	 
+                </td>
+                <td>
+                 20%
+                </td>
+                <td>
+                 15 days
+                </td>
+                <td>
+                 5
+                </td>
+                </tr>
+                  <tr>
+                <td>
+                100 to 1000	
+                </td>
+                <td>
+                 30%
+                </td>
+                <td>
+                15 days	
+                </td>
+                <td>
+                 4
+                </td>
+                </tr>
+                  <tr>
+                <td>
+                1000 to 10000
+                </td>
+                <td>
+                25%
+                </td>
+                <td>
+                30 days
+                </td>
+                <td>
+                4
+                </td>
+                </tr>
+                  <tr>
+                <td>
+                More than 10000 
+                </td>
+                <td>
+                Plans not offered	
+                </td>
+                <td>
+                 Plans not offered
+                </td>
+                <td>
+                Plans not offered
+                </td>
+                </tr>
+                 
+        </table>
+
 
 
