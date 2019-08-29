@@ -98,7 +98,7 @@ The plan calculator will take the purchase price and purchase date as input and 
 --------------------------------------------------------------------------------------------------------------------------------
 Tool used - Visual Studio 2019
 
-Implemented : Clean Architecture, SOLID Principle, Dependency Injection, Repository Pattren.
+Implemented : Clean Architecture, SOLID Principle, Dependency Injection, Repository Pattren, XUnit Test.
 
 PlanCalculator solution contains 4 projects (Console, Core, Infrastructure, UnitTest)
 
